@@ -1,8 +1,6 @@
 import styled from "styled-components";
-import Navbar from "../components/Navbar";
-import Footer from "../components/Footer"
 import { Add, Remove } from "@mui/icons-material";
-import { useLocation } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { addProduct } from "../redux/cartRedux";
@@ -112,6 +110,7 @@ const Button = styled.button`
   background-color: white;
   cursor: pointer;
   font-weight: 500;
+  margin: 30px;
   &:hover{
       background-color: #dff9fb;
   }
@@ -157,7 +156,6 @@ const Product = () => {
 
   return (
     <Container>
-      <Navbar/>
       <Wrapper>
         <ImgContainer>
           <Image src={product.image}/>
@@ -188,11 +186,13 @@ const Product = () => {
               <Amount>{quantity}</Amount>
               <Add onClick={() => handleQuantity("increase")}/>
             </AmountContainer>
-            <Button onClick={handleClick}>AJOUTER AU PANIER</Button>
+            <Button onClick={handleClick}>AJOUTER</Button>
+            <Link to="/cart/summary">
+              <Button>COMMANDEZ</Button>
+            </Link>
           </AddContainer>
         </InfoContainer>
       </Wrapper>
-      <Footer/>
     </Container>
   );
 }

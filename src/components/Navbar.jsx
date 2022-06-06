@@ -62,7 +62,7 @@ const Navbar =() => {
         </Left>
         <Center><Logo>PANOPSHOP</Logo></Center>
         <Right>
-          <Link to="/cart">
+          <Link to="/cart/summary">
           <MenuItem>
             <Badge badgeContent={quantity} color="primary">
               <ShoppingCartOutlinedIcon/>

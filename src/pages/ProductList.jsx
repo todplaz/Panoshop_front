@@ -1,7 +1,5 @@
 import styled from "styled-components";
-import Navbar from "../components/Navbar";
 import Products from "../components/Products";
-import Footer from "../components/Footer";
 import { useState } from "react";
 
 
@@ -47,7 +45,6 @@ const ProductList = () => {
 
   return (
     <Container>
-      <Navbar />
       <Title>Articles</Title>
       <FilterContainer>
         <Filter>
@@ -79,7 +76,6 @@ const ProductList = () => {
         </Filter>
       </FilterContainer>
       <Products filters={filters}/>
-      <Footer />
     </Container>
   );
 };
