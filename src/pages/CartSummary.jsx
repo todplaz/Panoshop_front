@@ -4,6 +4,7 @@ import styled from "styled-components";
 import { useDispatch } from "react-redux";
 import { setQuantity } from "../redux/cartRedux";
 import { Link } from "react-router-dom";
+import { getTotal } from "../helpers";
 
 const Container = styled.div``;
 
@@ -126,8 +127,6 @@ const CartSummary = () => {
   const cart = useSelector((state) => state.cart);
   const dispatch = useDispatch();
 
-  console.log("Cart:", cart);
-
   const handleQuantity = (type, product) => {
 
     dispatch(setQuantity({ type, product }));
@@ -178,7 +177,7 @@ const CartSummary = () => {
             <SummaryTitle>RECAPITULATIF DE LA COMMANDE</SummaryTitle>
             <SummaryItem type="total">
               <SummaryItemText>TOTAL</SummaryItemText>
-              <SummaryItemPrice>{cart.total}€</SummaryItemPrice>
+              <SummaryItemPrice>{getTotal(cart.products)}€</SummaryItemPrice>
             </SummaryItem>
             <Link to="/cart/delivery">
               <Button>PASSEZ LA COMMANDE</Button>

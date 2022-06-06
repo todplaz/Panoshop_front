@@ -6,79 +6,75 @@ import axios from "axios";
 import { addProduct } from "../redux/cartRedux";
 import { useDispatch } from "react-redux";
 
-
-
 const Container = styled.div``;
 
 const Wrapper = styled.div`
-    padding: 50px;
-    display: flex;
+  padding: 50px;
+  display: flex;
 `;
 
 const ImgContainer = styled.div`
-    flex: 1;
+  flex: 1;
 `;
 
 const Image = styled.img`
-    width: 100%;
-    height: 90vh;
-    object-fit: cover;
+  width: 100%;
+  height: 90vh;
+  object-fit: cover;
 `;
 
 const InfoContainer = styled.div`
-    flex: 1;
-    padding: 0px 50px;
+  flex: 1;
+  padding: 0px 50px;
 `;
 
 const Title = styled.h1`
-    font-weight: 300;
-    margin: 20px 0px;
+  font-weight: 300;
+  margin: 20px 0px;
 `;
 
 const Price = styled.span`
-    font-weight: 100;
-    font-size: 30px;
+  font-weight: 100;
+  font-size: 30px;
 `;
 
-const Value =styled.span`
-    font-weight: 300;
-    margin: 10px;
+const Value = styled.span`
+  font-weight: 300;
+  margin: 10px;
 `;
 
 const FilterContainer = styled.div`
-    width: 50%;
-    display: flex;
-    margin: 30px 0px;
-    justify-content: space-between;
+  width: 50%;
+  display: flex;
+  margin: 30px 0px;
+  justify-content: space-between;
 `;
 
 const Filter = styled.div`
-    display: flex;
-    align-items: center;
+  display: flex;
+  align-items: center;
 `;
 
 const FilterTitle = styled.span`
-    font-size: 20px;
-    font-weight: 200;
+  font-size: 20px;
+  font-weight: 200;
 `;
 
 const FilterColor = styled.div`
-    width: 20px;
-    height: 20px;
-    border-radius: 50%;
-    background-color: ${(props) => props.color};
-    margin: 0px 3px;
-    cursor: pointer;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background-color: ${(props) => props.color};
+  margin: 0px 3px;
+  cursor: pointer;
 `;
 
 const FilterSize = styled.select`
-    margin-left: 10px;
-    padding: 5px;
+  margin-left: 10px;
+  padding: 5px;
 `;
 
-const FilterSizeOption = styled.option`
-
-`;
+const FilterSizeOption = styled.option``;
 
 const AddContainer = styled.div`
   width: 50%;
@@ -111,15 +107,12 @@ const Button = styled.button`
   cursor: pointer;
   font-weight: 500;
   margin: 30px;
-  &:hover{
-      background-color: #dff9fb;
+  &:hover {
+    background-color: #dff9fb;
   }
 `;
 
-
-
 const Product = () => {
-
   const location = useLocation();
   const id = location.pathname.split("/")[2];
 
@@ -132,45 +125,46 @@ const Product = () => {
   useEffect(() => {
     const getProduct = async () => {
       try {
-        const res = await axios.get("http://localhost:4000/api/v1/products/find/" + id)
+        const res = await axios.get(
+          "http://localhost:4000/api/v1/products/find/" + id
+        );
         setProduct(res.data);
-      } catch (err) {
-
-      }
-    }
+      } catch (err) {}
+    };
     getProduct();
-  }, [id])
+  }, [id]);
 
   const handleQuantity = (type) => {
-    if(type === "decrease") {
+    if (type === "decrease") {
       quantity > 1 && setQuantity(quantity - 1);
     } else {
       setQuantity(quantity + 1);
     }
-  } 
+  };
 
   const handleClick = () => {
     dispatch(addProduct({ ...product, quantity, color, size }));
-  }
-
+  };
 
   return (
     <Container>
       <Wrapper>
         <ImgContainer>
-          <Image src={product.image}/>
+          <Image src={product.image} />
         </ImgContainer>
         <InfoContainer>
           <Title>{product.title}</Title>
           <Price>
-            {product.price}<Value>€</Value>
+            {product.price}
+            <Value>€</Value>
           </Price>
           <FilterContainer>
-          <Filter>
-            <FilterTitle>Couleur</FilterTitle>
-            {product.color?.map((c) => (
-            <FilterColor color={c} key={c} onClick={() => setColor(c)}/>))}
-          </Filter>
+            <Filter>
+              <FilterTitle>Couleur</FilterTitle>
+              {product.color?.map((c) => (
+                <FilterColor color={c} key={c} onClick={() => setColor(c)} />
+              ))}
+            </Filter>
             <Filter>
               <FilterTitle>Taille</FilterTitle>
               <FilterSize onChange={(e) => setSize(e.target.value)}>
@@ -182,9 +176,9 @@ const Product = () => {
           </FilterContainer>
           <AddContainer>
             <AmountContainer>
-              <Remove onClick={() => handleQuantity("decrease")}/>
+              <Remove onClick={() => handleQuantity("decrease")} />
               <Amount>{quantity}</Amount>
-              <Add onClick={() => handleQuantity("increase")}/>
+              <Add onClick={() => handleQuantity("increase")} />
             </AmountContainer>
             <Button onClick={handleClick}>AJOUTER</Button>
             <Link to="/cart/summary">
@@ -195,6 +189,6 @@ const Product = () => {
       </Wrapper>
     </Container>
   );
-}
+};
 
 export default Product;

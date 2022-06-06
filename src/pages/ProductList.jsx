@@ -53,16 +53,16 @@ const ProductList = () => {
             <Option disabled>
               Couleur
             </Option>
-            <Option>Gris</Option>
-            <Option>Bicouleur</Option>
-            <Option>Bleu</Option>
-            <Option>Jaune</Option>
-            <Option>Noir</Option>
-            <Option>Rouge</Option>
-            <Option>Blanc</Option>
-            <Option>Marron</Option>
-            <Option>Vert</Option>
-            <Option>Kaki</Option>
+            <Option>gray</Option>
+            <Option>indigo</Option>
+            <Option>blue</Option>
+            <Option>yellow</Option>
+            <Option>black</Option>
+            <Option>red</Option>
+            <Option>white</Option>
+            <Option>brown</Option>
+            <Option>green</Option>
+            <Option>khaki</Option>
           </Select>
           <Select name="size" onChange={handleFilters}>
             <Option disabled>

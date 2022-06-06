@@ -3,6 +3,8 @@ import styled from "styled-components";
 import { useDispatch } from "react-redux";
 import Input from "../components/Input";
 import { useState } from "react";
+import { getTotal } from "../helpers";
+import { Link } from "react-router-dom";
 
 const Container = styled.div``;
 
@@ -76,13 +78,13 @@ const Modal = styled.div`
 `;
 
 const ModalContent = styled.div`
-    z-index: 2;
-    background-color: #55E6C1;
-    padding: 20px;
-    width: 100%;
-    height: 100%;
-    display: flex;
-    align-item: flex-end;
+  z-index: 2;
+  background-color: #55e6c1;
+  padding: 20px;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-item: flex-end;
 `;
 
 const ButtonModal = styled.button`
@@ -92,8 +94,6 @@ const ButtonModal = styled.button`
   color: white;
   font-weight: 600;
 `;
-
-
 
 const Payment = () => {
   const cart = useSelector((state) => state.cart);
@@ -109,14 +109,14 @@ const Payment = () => {
     <>
       <Container>
         <Wrapper>
-      {open && (
-        <Modal>
-          <ModalContent>
-            <ButtonModal onClick={() => setOpen(false)}>Close</ButtonModal>
-            <div>Votre paiement a bien été éffectué</div>
-          </ModalContent>
-        </Modal>
-      )}
+          {open && (
+            <Modal>
+              <ModalContent>
+                <ButtonModal onClick={() => setOpen(false)}>Close</ButtonModal>
+                <div>Votre paiement a bien été éffectué</div>
+              </ModalContent>
+            </Modal>
+          )}
           <Title>PAIEMENT</Title>
           <Bottom>
             <Info>
@@ -126,20 +126,21 @@ const Payment = () => {
               <Input label="Numéro de la carte CB : " />
               <Input label="Date d'expiration : " />
               <Input label="Sécurité code: " />
-              <Button onClick={handlerClick}>Valider</Button>
+              <Link to="/cart/recap">
+                <Button onClick={handlerClick}>Valider</Button>
+              </Link>
               <Hr />
             </Info>
             <Summary>
               <SummaryTitle>RECAPITULATIF DE LA COMMANDE</SummaryTitle>
               <SummaryItem type="total">
                 <SummaryItemText>TOTAL</SummaryItemText>
-                <SummaryItemPrice>{cart.total}€</SummaryItemPrice>
+                <SummaryItemPrice>{getTotal(cart.products)}€</SummaryItemPrice>
               </SummaryItem>
             </Summary>
           </Bottom>
         </Wrapper>
       </Container>
-      
     </>
   );
 };

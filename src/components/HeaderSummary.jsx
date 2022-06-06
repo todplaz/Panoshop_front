@@ -30,7 +30,6 @@ const Center = styled.div`
 
 
 const HeaderSummary = () => {
-  // const quantity = useSelector(state => state.cart.quantity)
 
   return (
     <>

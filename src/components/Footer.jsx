@@ -60,10 +60,10 @@ const Footer = () => {
     <Container>
       <Left>
         <Logo>
-          PANOSHOP
+          PANOPSHOP
         </Logo>
         <Desc>
-          Panoshop est un site dédié a la vente d'articles recyclés afin de garantir la préservation de la planète.
+          Panopshop est un site dédié a la vente d'articles recyclés afin de garantir la préservation de la planète.
         </Desc>
         <SocialContainer>
           <SocialIcon color="3B5999">

@@ -3,6 +3,8 @@ import styled from "styled-components";
 import { useDispatch } from "react-redux";
 import Input from "../components/Input";
 import { Link } from "react-router-dom";
+import { useState } from "react";
+import { getTotal } from "../helpers";
 
 
 const Container = styled.div``;
@@ -70,7 +72,27 @@ const Button = styled.button`
 const Delivery = () => {
   const cart = useSelector((state) => state.cart);
   const dispatch = useDispatch();
-  
+
+  const infoInput = {
+    "Adresse": "",
+    "Code postal": "",
+    "Ville": "",
+    "Numéro de téléphone": "",
+  };
+
+
+  const [formData, setFormData] = useState(infoInput);
+
+  const handleChange = (e) => {
+    setFormData({
+      ...formData, 
+      [e.target.name]: e.target.value.trim(),
+      [e.target.name]: e.target.value.trim(),
+      [e.target.name]: e.target.value.trim(),
+      [e.target.name]: e.target.value.trim(),
+    })
+    console.log(formData);
+  }
 
   return (
     <Container>
@@ -78,10 +100,10 @@ const Delivery = () => {
         <Title>ADRESSE DE LIVRAISON</Title>
         <Bottom>
           <Info>
-            <Input label="votre adresse : "/>
-            <Input label="votre code postal : "/>
-            <Input label="votre ville : "/>
-            <Input label="votre numéro de téléphone : "/>
+            <Input name="address" label="Adresse : " onChange={handleChange} />
+            <Input name="postal" label="Code postal : " onChange={handleChange} />
+            <Input name="city" label="Ville : " onChange={handleChange} />
+            <Input name="phone" label="Numéro de téléphone : " onChange={handleChange} />
             <Link to="/cart/payment">
               <Button>Valider</Button>
             </Link>
@@ -91,7 +113,7 @@ const Delivery = () => {
             <SummaryTitle>RECAPITULATIF DE LA COMMANDE</SummaryTitle>
             <SummaryItem type="total">
               <SummaryItemText>TOTAL</SummaryItemText>
-              <SummaryItemPrice>{cart.total}€</SummaryItemPrice>
+              <SummaryItemPrice>{getTotal(cart.products)}€</SummaryItemPrice>
             </SummaryItem>
           </Summary>
         </Bottom>

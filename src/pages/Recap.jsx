@@ -17,9 +17,9 @@ const Title = styled.h1`
 
 const Bottom = styled.div`
   display: flex;
-  justify-content: space-between;
+  align-item: center;
+  justify-content: center;
 `;
-
 
 const Info = styled.div`
   flex: 3;
@@ -89,14 +89,9 @@ const Hr = styled.hr`
   height: 1px;
 `;
 
-
-
-
 const Recap = () => {
   const cart = useSelector((state) => state.cart);
   const dispatch = useDispatch();
-
-  console.log("Cart:", cart);
 
   const handleQuantity = (type, product) => {
     dispatch(setQuantity({ type, product }));
@@ -108,39 +103,48 @@ const Recap = () => {
         <Title>RECAPITULATIF</Title>
         <Bottom>
           <Info>
-            Nom: Alex <br/>
-            Prénom: Stéphane <br/>
-            Téléphone: 36576879 <br/>
-            Paiement par CB: ****** <br/>
+            Nom: Alex <br />
             <Hr />
-            Adresse de livraison: Alex <br/>
-            Code postal: Stéphane <br/>
-            Ville: 36576879 <br/>
-            <Hr/>
+            Prénom: Stéphane <br />
+            <Hr />
+            Téléphone: 36576879 <br />
+            <Hr />
+            Paiement par CB: ****** <br />
+            <Hr />
+            Adresse de livraison: Alex <br />
+            <Hr />
+            Code postal: Stéphane <br />
+            <Hr />
+            Ville: 36576879 <br />
+            <Hr />
             {cart.products.map((product) => (
               <Product>
-              <ProductDetail>
-                <Image src={product.image}/>
-                <Details>
-                  <ProductName>
-                    <b>Article:</b> {product.title}
-                  </ProductName>
-                  <ProductId>
-                    <b>ID:</b>{product.id}
-                  </ProductId>
-                  <ProductColor color={product.color}/>
-                  <ProductSize>
-                    <b>Taille</b>{product.size}
-                  </ProductSize>
-                </Details>
-              </ProductDetail>
-              <PriceDetail>
-                <ProductAmountContainer>
-                  <ProductAmount>{product.quantity}</ProductAmount>
-                </ProductAmountContainer>
-                <ProductPrice>{product.price * product.quantity}€</ProductPrice>
-              </PriceDetail>
-            </Product>
+                <ProductDetail>
+                  <Image src={product.image} />
+                  <Details>
+                    <ProductName>
+                      <b>Article:</b> {product.title}
+                    </ProductName>
+                    <ProductId>
+                      <b>ID:</b>
+                      {product.id}
+                    </ProductId>
+                    <ProductColor color={product.color} />
+                    <ProductSize>
+                      <b>Taille</b>
+                      {product.size}
+                    </ProductSize>
+                  </Details>
+                </ProductDetail>
+                <PriceDetail>
+                  <ProductAmountContainer>
+                    <ProductAmount>{product.quantity}</ProductAmount>
+                  </ProductAmountContainer>
+                  <ProductPrice>
+                    {product.price * product.quantity}€
+                  </ProductPrice>
+                </PriceDetail>
+              </Product>
             ))}
           </Info>
         </Bottom>
