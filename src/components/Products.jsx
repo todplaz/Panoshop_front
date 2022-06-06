@@ -15,7 +15,7 @@ const Container = styled.div`
 
 
 
-const Products = ({filters, sort}) => {
+const Products = ({filters}) => {
 
   const [products, setproducts] = useState([]);
   const [filteredProducts, setFilteredProducts] = useState([]);
@@ -23,7 +23,7 @@ const Products = ({filters, sort}) => {
   useEffect(() => {
     const getProducts = async () => {
       try {
-        const res = await axios.get( filters ? `http://localhost:4000/api/v1/products?filters=${filters}` : "http://localhost:4000/api/v1/products");
+        const res = await axios.get(`http://localhost:4000/api/v1/products?filters=${filters}`);
         setproducts(res.data);
       } catch (err) {}
     }
@@ -35,14 +35,6 @@ const Products = ({filters, sort}) => {
       products.filter((item) => Object.entries(filters).every(([key, value]) => item[key].includes(value)))
     )
   }, [products, filters]);
-
-  useEffect(() => {
-    if(sort === "asc") {
-      setFilteredProducts((prev) => [...prev].sort((a, b) => a.price - b.price));
-    } else {
-      setFilteredProducts((prev) => [...prev].sort((a, b) => b.price - a.price));
-    }
-  }, [sort]);
 
   return (
     <Container>

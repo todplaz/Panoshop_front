@@ -1,4 +1,5 @@
 import { Add, Remove } from "@mui/icons-material";
+import { useSelector } from "react-redux";
 import styled from "styled-components";
 import Footer from "../components/Footer";
 import Navbar from "../components/Navbar";
@@ -14,31 +15,9 @@ const Wrapper = styled.div`
 const Title = styled.h1`
     font-weight: 300;
     text-align: center;
+    margin-bottom: 50px;
 `;
 
-const Top = styled.div`
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 20px;
-`;
-
-const TopButton = styled.button`
-    padding: 10px;
-    font-weight: 600;
-    cursor: pointer;
-    border: ${(props)=>props.type === "filled" && "none"};
-    background-color: ${(props)=>props.type === "filled" ? "black" : "transparent"};
-    color: ${(props)=>props.type === "filled" && "white"};
-`;
-
-const TopTexts = styled.div``;
-
-const TopText = styled.span`
-    text-decoration: underline;
-    cursor: pointer;
-    margin: 0px 10px
-`;
 
 const Bottom = styled.div`
     display: flex;
@@ -149,79 +128,44 @@ const Button = styled.button`
 
 
 const CartSummary = () => {
+
+  const cart = useSelector(state => state.cart);
+
   return (
     <Container>
       <Navbar/>
       <Wrapper>
         <Title>VOTRE PANIER</Title>
-        <Top>
-          <TopButton>CONTINUEZ VOS ACHATS</TopButton>
-          <TopTexts>
-            <TopText>VOS ACHATS(2)</TopText>
-          </TopTexts>
-          <TopButton type="filled">PASSEZ A LA CAISSE</TopButton>
-        </Top>
         <Bottom>
           <Info>
-            <Product>
+            {cart.products.map((product) => (
+              <Product>
               <ProductDetail>
-                <Image src="https://www.lamaisondelhomme.fr/wp-content/uploads/2018/12/1051_VESTE-GILET-PANTALON.jpg"/>
+                <Image src={product.image}/>
                 <Details>
-                  <ProductName><b>Article:</b>Veste Homme</ProductName>
-                  <ProductId><b>ID:</b>15</ProductId>
-                  <ProductColor color="blue"/>
-                  <ProductSize><b>Taille</b>XL</ProductSize>
+                  <ProductName>
+                    <b>Article:</b> {product.title}
+                  </ProductName>
+                  <ProductId>
+                    <b>ID:</b>{product.id}
+                  </ProductId>
+                  <ProductColor color={product.color}/>
+                  <ProductSize>
+                    <b>Taille</b>{product.size}
+                  </ProductSize>
                 </Details>
               </ProductDetail>
               <PriceDetail>
                 <ProductAmountContainer>
                   <Add/>
-                  <ProductAmount>4</ProductAmount>
+                  <ProductAmount>{product.quantity}</ProductAmount>
                   <Remove/>
                 </ProductAmountContainer>
-                <ProductPrice>800€</ProductPrice>
+                <ProductPrice>{product.price * product.quantity}€</ProductPrice>
               </PriceDetail>
             </Product>
-            <Hr/>
-            <Product>
-              <ProductDetail>
-                <Image src="https://global-uploads.webflow.com/6256995755a7ea0a3d8fbd11/6264608dc2a008c5703c41cb_1.jpg"/>
-                <Details>
-                  <ProductName><b>Article:</b>Veste Homme</ProductName>
-                  <ProductId><b>ID:</b>9</ProductId>
-                  <ProductColor color="blue"/>
-                  <ProductSize><b>Taille</b>XL</ProductSize>
-                </Details>
-              </ProductDetail>
-              <PriceDetail>
-                <ProductAmountContainer>
-                  <Add/>
-                  <ProductAmount>4</ProductAmount>
-                  <Remove/>
-                </ProductAmountContainer>
-                <ProductPrice>400€</ProductPrice>
-              </PriceDetail>
-            </Product>
-            <Hr/>
-            <Product>
-              <ProductDetail>
-                <Image src="https://media.neimanmarcus.com/f_auto,q_auto:low,ar_4:5,c_fill,dpr_2.0,w_456/01/nm_4080056_100101_a"/>
-                <Details>
-                  <ProductName><b>Article:</b>Veste Homme</ProductName>
-                  <ProductId><b>ID:</b>13</ProductId>
-                  <ProductColor color="blue"/>
-                  <ProductSize><b>Taille</b>XL</ProductSize>
-                </Details>
-              </ProductDetail>
-              <PriceDetail>
-                <ProductAmountContainer>
-                  <Add/>
-                  <ProductAmount>4</ProductAmount>
-                  <Remove/>
-                </ProductAmountContainer>
-                <ProductPrice>700€</ProductPrice>
-              </PriceDetail>
-            </Product>
+            ))}              
+            <Hr/>           
           </Info>
           <Summary>
             <SummaryTitle>
@@ -229,7 +173,7 @@ const CartSummary = () => {
             </SummaryTitle>
             <SummaryItem type="total">
               <SummaryItemText>TOTAL</SummaryItemText>
-              <SummaryItemPrice>1900€</SummaryItemPrice>
+              <SummaryItemPrice>{cart.total}€</SummaryItemPrice>
             </SummaryItem>
             <Button>PASSEZ LA COMMANDE</Button>
           </Summary>

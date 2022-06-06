@@ -1,8 +1,9 @@
 import React from 'react';
 import styled from 'styled-components';
-import SearchIcon from '@mui/icons-material/Search';
 import { Badge } from '@mui/material';
 import ShoppingCartOutlinedIcon from '@mui/icons-material/ShoppingCartOutlined';
+import { useSelector } from 'react-redux';
+import { Link } from 'react-router-dom';
 
 
 const Container = styled.div`
@@ -25,21 +26,12 @@ const Language = styled.span`
     cursor: pointer;
 `
 
-const SearchContainer = styled.div`
-    border: 0.5px solid lightgray;
-    display: flex;
-    align-items: center;
-    margin-left: 25px;
-    padding: 5px;
-`
-
-const Input = styled.input`
-    border: none;
-`
 
 const Center = styled.div`
-    flex: 1;
+    display: flex;
+    align-item: center;
     text-align: center;
+    justify-content: center;
 `
 const Logo = styled.h1`
     font-weight: bold;
@@ -59,25 +51,24 @@ const MenuItem = styled.div`
 `
 
 const Navbar =() => {
+
+  const quantity = useSelector(state => state.cart.quantity)
+
   return (
     <Container>
       <Wrapper>
         <Left>
           <Language>FR</Language>
-          <SearchContainer>
-           <Input/>
-           <SearchIcon style={{color:"gray", fontSize: 16}}/>
-          </SearchContainer>
         </Left>
         <Center><Logo>PANOPSHOP</Logo></Center>
         <Right>
-          <MenuItem>S'INSCRIRE</MenuItem>
-          <MenuItem>S'IDENTIFIER</MenuItem>
+          <Link to="/cart">
           <MenuItem>
-            <Badge badgeContent={4} color="primary">
+            <Badge badgeContent={quantity} color="primary">
               <ShoppingCartOutlinedIcon/>
             </Badge>
           </MenuItem>
+          </Link>
         </Right>
       </Wrapper>
     </Container>

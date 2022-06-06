@@ -7,8 +7,6 @@ import {
 } from "react-router-dom";
 import ProductList from './pages/ProductList';
 import CartSummary from './pages/CartSummary';
-// import Login from './pages/Login';
-// import Register from './pages/Register';
 import Product from './pages/Product';
 
 function App() {

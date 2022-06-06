@@ -3,6 +3,7 @@ import styled from "styled-components";
 import ArrowBackIosNewOutlinedIcon from '@mui/icons-material/ArrowBackIosNewOutlined';
 import ArrowForwardIosOutlinedIcon from '@mui/icons-material/ArrowForwardIosOutlined';
 import { sliderItems } from "../sliderData";
+import { Link } from "react-router-dom";
 
 
 const Container = styled.div`
@@ -109,7 +110,9 @@ const Slider = () => {
               <InfoContainer>
                 <Title>{item.title}</Title>
                 <Description>{item.description}</Description>
-                <Button>SHOPPEZ</Button>
+                <Link to={"/products"}>
+                  <Button>SHOPPEZ</Button>                
+                </Link>
               </InfoContainer>
             </Slide>
           ))}

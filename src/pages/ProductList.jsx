@@ -35,7 +35,6 @@ const Option = styled.option``;
 const ProductList = () => {
 
   const [filters, setFilters] = useState({}); 
-  const [sort, setSort] = useState("asc")
   
   const handleFilters = (e) => {
     const value = e.target.value;
@@ -78,15 +77,8 @@ const ProductList = () => {
             <Option>XL</Option>
           </Select>
         </Filter>
-        <Filter>
-          <FilterText>Trier par:</FilterText>
-          <Select onChange={(e) => setSort(e.target.value)}>
-            <Option value="asc">Prix (asc)</Option>
-            <Option value="desc">Prix (desc)</Option>
-          </Select>
-        </Filter>
       </FilterContainer>
-      <Products filters={filters} sort={sort}/>
+      <Products filters={filters}/>
       <Footer />
     </Container>
   );

@@ -2,7 +2,7 @@ export const productsItems = [
   {
       "id": 1,
       "title": "Robe de soirée femme rouge",
-      "color": ["Red","Blue","Black"],
+      "color": ["red","blue","black"],
       "image": "https://7263497.fs1.hubspotusercontent-na1.net/hubfs/7263497/ghost-expand.jpg",
       "price": "312.00",
       "size": ["M","L","XL"]
@@ -10,7 +10,7 @@ export const productsItems = [
   {
       "id": 2,
       "title": "Sweet tendance homme",
-      "color": ["Red","Blue","Black"],
+      "color": ["red","blue","black"],
       "image": "https://global-uploads.webflow.com/6256995755a7ea0a3d8fbd11/625fead1a8046c507963fc91_5ef0a3f4914def1507e14606_Order%2520%2523538879%2520%257C%2520perescameron%2540gmail.com%25202.jpeg",
       "price": "752.00",
       "size": ["M","L","XL"]
@@ -18,7 +18,7 @@ export const productsItems = [
     {
       "id": 3,
       "title": "Robe bleue boheme",
-      "color": ["Red","Blue","Black"],
+      "color": ["red","blue","black"],
       "image": "https://global-uploads.webflow.com/6256995755a7ea0a3d8fbd11/625feaf5be4946f268ea98ef_5ef0abeeb22d833e37cf5904_Order%2520%2523538707%2520%257C%2520vanessa%2540ericawilson.com%252010.jpeg",
       "price": "714.00",
       "size": ["M","L","XL"]
@@ -26,7 +26,7 @@ export const productsItems = [
   {
       "id": 4,
       "title": "Robe boheme multicouleur",
-      "color": ["Red","Blue","Black"],
+      "color": ["red","blue","black"],
       "image": "https://global-uploads.webflow.com/6256995755a7ea0a3d8fbd11/625feaf854ed80479b25c78a_5ef0aca6ea709d42ce64fca2_Order%2520%2523538707%2520%257C%2520vanessa%2540ericawilson.com%25203.jpeg",
       "price": "748.00",
       "size": ["S","M","L","XL"]
