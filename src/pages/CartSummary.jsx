@@ -144,15 +144,15 @@ const CartSummary = () => {
                   <Image src={product.image} />
                   <Details>
                     <ProductName>
-                      <b>Article:</b> {product.title}
+                      <b>Article : </b> {product.title}
                     </ProductName>
                     <ProductId>
-                      <b>ID:</b>
+                      <b>ID : </b>
                       {product.id}
                     </ProductId>
                     <ProductColor color={product.color} />
                     <ProductSize>
-                      <b>Taille</b>
+                      <b>Taille : </b>
                       {product.size}
                     </ProductSize>
                   </Details>

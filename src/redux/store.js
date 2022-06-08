@@ -1,5 +1,7 @@
 import { configureStore } from "@reduxjs/toolkit";
 import cartReducer from "./cartRedux";
+import paymentReducer from "./paymentRedux";
+import deliveryReducer from "./deliveryRedux";
 
 
 
@@ -7,5 +9,7 @@ import cartReducer from "./cartRedux";
 export default configureStore({
   reducer: {
     cart: cartReducer,
+    payment: paymentReducer,
+    delivery: deliveryReducer,
   }
-})
+});

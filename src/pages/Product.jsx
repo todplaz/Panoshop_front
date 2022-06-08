@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import { Add, Remove } from "@mui/icons-material";
-import { Link, useLocation } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { addProduct } from "../redux/cartRedux";
@@ -113,8 +113,9 @@ const Button = styled.button`
 `;
 
 const Product = () => {
-  const location = useLocation();
-  const id = location.pathname.split("/")[2];
+  // const location = useLocation();
+  const params = useParams();
+  const id = params.id;
 
   const [product, setProduct] = useState({});
   const [quantity, setQuantity] = useState(1);
@@ -155,7 +156,7 @@ const Product = () => {
         <InfoContainer>
           <Title>{product.title}</Title>
           <Price>
-            {product.price}
+            {product.price * quantity}
             <Value>€</Value>
           </Price>
           <FilterContainer>

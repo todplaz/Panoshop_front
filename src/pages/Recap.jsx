@@ -3,7 +3,20 @@ import styled from "styled-components";
 import { useDispatch } from "react-redux";
 import { setQuantity } from "../redux/cartRedux";
 
-const Container = styled.div``;
+const Container = styled.div`
+  width: 100vw;
+  height: 100vh;
+  background: linear-gradient(
+      rgba(255, 255, 255, 0.5),
+      rgba(255, 255, 255, 0.5)
+    ),
+    url("https://assets.hermes.com/is/image/hermesproduct/short-run-h--257670HA06-worn-1-0-0-800-800_b.jpg")
+      center;
+  background-size: cover;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+`;
 
 const Wrapper = styled.div`
   padding: 20px;
@@ -91,6 +104,8 @@ const Hr = styled.hr`
 
 const Recap = () => {
   const cart = useSelector((state) => state.cart);
+  const cartDelivery = useSelector((state) => state.delivery);
+  const cartPayment = useSelector((state) => state.payment);
   const dispatch = useDispatch();
 
   const handleQuantity = (type, product) => {
@@ -103,35 +118,39 @@ const Recap = () => {
         <Title>RECAPITULATIF</Title>
         <Bottom>
           <Info>
-            Nom: Alex <br />
+            Nom: {cartPayment.name} <br />
             <Hr />
-            Prénom: Stéphane <br />
+            Prénom: {cartPayment.surname} <br />
             <Hr />
-            Téléphone: 36576879 <br />
+            Téléphone: {cartDelivery.phone} <br />
             <Hr />
-            Paiement par CB: ****** <br />
+            Paiement par CB: {cartPayment.bank} <br />
             <Hr />
-            Adresse de livraison: Alex <br />
+            Adresse de livraison: {cartDelivery.address} <br />
             <Hr />
-            Code postal: Stéphane <br />
+            Code postal: {cartDelivery.postal} <br />
             <Hr />
-            Ville: 36576879 <br />
+            Ville: {cartDelivery.city} <br />
             <Hr />
+            <br />
+            <br />
+            <br />
+            <br />
             {cart.products.map((product) => (
               <Product>
                 <ProductDetail>
                   <Image src={product.image} />
                   <Details>
                     <ProductName>
-                      <b>Article:</b> {product.title}
+                      <b>Article : </b> {product.title}
                     </ProductName>
                     <ProductId>
-                      <b>ID:</b>
+                      <b>ID : </b>
                       {product.id}
                     </ProductId>
                     <ProductColor color={product.color} />
                     <ProductSize>
-                      <b>Taille</b>
+                      <b>Taille : </b>
                       {product.size}
                     </ProductSize>
                   </Details>

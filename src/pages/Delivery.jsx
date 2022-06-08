@@ -1,28 +1,9 @@
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import styled from "styled-components";
-import { useDispatch } from "react-redux";
-import Input from "../components/Input";
-import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 import { getTotal } from "../helpers";
-
-
-const Container = styled.div``;
-
-const Wrapper = styled.div`
-  padding: 20px;
-`;
-
-const Title = styled.h1`
-  font-weight: 300;
-  text-align: center;
-  margin-bottom: 50px;
-`;
-
-const Bottom = styled.div`
-  display: flex;
-  justify-content: space-between;
-`;
+import { addDelivery } from "../redux/deliveryRedux";
 
 const Summary = styled.div`
   flex: 1;
@@ -32,27 +13,14 @@ const Summary = styled.div`
   height: 50vh;
 `;
 
-const Info = styled.div`
-    flex: 3;
-    margin: auto;
-    padding: 0 10%;
-`;
-
-const Hr = styled.hr`
-  background-color: #eee;
-  border: none;
-  height: 1px;
-`;
-
 const SummaryTitle = styled.h1`
   font-weight: 200;
 `;
 
-
 const SummaryItem = styled.div`
-  margin: 30px 0px;
+  margin: 50px 40px;
   display: flex;
-  justify-content: space-between;
+  justify-content: space-around;
   font-weight: ${(props) => props.type === "total" && "500"};
   font-size: ${(props) => props.type === "total" && "24px"};
 `;
@@ -61,62 +29,125 @@ const SummaryItemText = styled.span``;
 
 const SummaryItemPrice = styled.span``;
 
-const Button = styled.button`
-  width: 100%;
+const Container = styled.div`
+  width: 100vw;
+  height: 100vh;
+  background: linear-gradient(
+      rgba(255, 255, 255, 0.5),
+      rgba(255, 255, 255, 0.5)
+    ),
+    url("https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/images/gettyimages-1043850770.jpg?crop=0.6666xw:1xh;center,top&resize=980:*")
+      center;
+  background-size: cover;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+`;
+
+const Wrapper = styled.div`
+  width: 40%;
+  padding: 20px;
+  background-color: white;
+`;
+
+const Form = styled.form`
+  display: flex;
+  flex-direction: column;
+`;
+
+const Title = styled.h1`
+  font-size: 24px;
+  font-weight: 300;
+`;
+
+const Input = styled.input`
+  flex: 1;
+  min-width: 40%;
+  margin: 20px 10px 0px 0px;
   padding: 10px;
-  background-color: black;
+`;
+
+const Button = styled.button`
+  width: 40%;
+  border: none;
+  padding: 15px 20px;
+  background-color: #22a6b3;
   color: white;
-  font-weight: 600;
+  cursor: pointer;
+  margin-top: 20px;
 `;
 
 const Delivery = () => {
   const cart = useSelector((state) => state.cart);
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const infoInput = {
-    "Adresse": "",
-    "Code postal": "",
-    "Ville": "",
-    "Numéro de téléphone": "",
+    address: "",
+    postal: "",
+    city: "",
+    phone: "",
   };
-
 
   const [formData, setFormData] = useState(infoInput);
 
-  const handleChange = (e) => {
+  const handleChange = (e) => {    
     setFormData({
       ...formData, 
-      [e.target.name]: e.target.value.trim(),
-      [e.target.name]: e.target.value.trim(),
-      [e.target.name]: e.target.value.trim(),
-      [e.target.name]: e.target.value.trim(),
+      [e.target.name]: e.target.value
     })
-    console.log(formData);
-  }
+  };
+
+  const handleClick = (e) => {
+    e.preventDefault();
+    dispatch(addDelivery(formData))
+    navigate("/cart/payment")
+  };
 
   return (
     <Container>
       <Wrapper>
         <Title>ADRESSE DE LIVRAISON</Title>
-        <Bottom>
-          <Info>
-            <Input name="address" label="Adresse : " onChange={handleChange} />
-            <Input name="postal" label="Code postal : " onChange={handleChange} />
-            <Input name="city" label="Ville : " onChange={handleChange} />
-            <Input name="phone" label="Numéro de téléphone : " onChange={handleChange} />
-            <Link to="/cart/payment">
-              <Button>Valider</Button>
-            </Link>
-            <Hr />
-          </Info>
-          <Summary>
-            <SummaryTitle>RECAPITULATIF DE LA COMMANDE</SummaryTitle>
-            <SummaryItem type="total">
-              <SummaryItemText>TOTAL</SummaryItemText>
-              <SummaryItemPrice>{getTotal(cart.products)}€</SummaryItemPrice>
-            </SummaryItem>
-          </Summary>
-        </Bottom>
+        <Form >
+          <Input
+            placeholder="Adresse"
+            name="address"
+            label="Adresse : "
+            onChange={handleChange}
+            value={formData.address}
+          />
+          <Input
+            placeholder="Code postal"
+            name="postal"
+            label="Code postal : "
+            onChange={handleChange}
+            value={formData.postal}
+          />
+          <Input
+            placeholder="Ville"
+            name="city"
+            label="Ville : "
+            onChange={handleChange}
+            value={formData.city}
+          />
+          <Input
+            placeholder="Numéro de téléphone"
+            name="phone"
+            label="Numéro de téléphone : "
+            onChange={handleChange}
+            value={formData.phone}
+          />
+            <Button onClick={handleClick}>VALIDER</Button>
+        </Form>
+      </Wrapper>
+      <Wrapper>
+        <Summary>
+          <SummaryTitle>RECAPITULATIF DE LA COMMANDE</SummaryTitle>
+          <SummaryItem type="total">
+            <SummaryItemText>TOTAL : </SummaryItemText>
+            <SummaryItemPrice>{getTotal(cart.products)}€</SummaryItemPrice>
+          </SummaryItem>
+        </Summary>
       </Wrapper>
     </Container>
   );

@@ -16,6 +16,9 @@ import Payment from './pages/Payment';
 import Delivery from './pages/Delivery';
 
 function App() {
+
+
+
   return (
     <BrowserRouter>
     <Navbar/>
