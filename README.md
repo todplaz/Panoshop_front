@@ -2,6 +2,17 @@
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
+# About my project.
+
+This project is a simple and classic e-commerce site that will be updated from time to time.
+It is followed by its backend part developed with nodejs.
+
+## How it work
+To launch it, you must clone the repo and go to the address: http://localhost:3000/ after entering 
+your terminal npm start to start the project and to access the home page of the site.
+At the same time, you will have to launch the backend part always with the npm start command 
+and go to the address http://localhost4000
+
 ## Available Scripts
 
 In the project directory, you can run:
