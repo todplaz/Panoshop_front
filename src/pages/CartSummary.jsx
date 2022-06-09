@@ -5,11 +5,13 @@ import { useDispatch } from "react-redux";
 import { setQuantity } from "../redux/cartRedux";
 import { Link } from "react-router-dom";
 import { getTotal } from "../helpers";
+import { mobile } from "../responsive";
 
 const Container = styled.div``;
 
 const Wrapper = styled.div`
   padding: 20px;
+  ${mobile({ padding: "10px" })}
 `;
 
 const Title = styled.h1`
@@ -21,6 +23,7 @@ const Title = styled.h1`
 const Bottom = styled.div`
   display: flex;
   justify-content: space-between;
+  ${mobile({ flexDirection: "column" })}
 `;
 
 const Summary = styled.div`
@@ -38,6 +41,7 @@ const Info = styled.div`
 const Product = styled.div`
   display: flex;
   justify-content: space-between;
+  ${mobile({ flexDirection: "column" })}
 `;
 
 const ProductDetail = styled.div`
@@ -86,11 +90,13 @@ const ProductAmountContainer = styled.div`
 const ProductAmount = styled.div`
   font-size: 24px;
   margin: 5px;
+  ${mobile({ margin: "5px 15px" })}
 `;
 
 const ProductPrice = styled.div`
   font-size: 30px;
   font-weight: 200;
+  ${mobile({ marginBottom: "20px" })}
 `;
 
 const Hr = styled.hr`
@@ -128,7 +134,6 @@ const CartSummary = () => {
   const dispatch = useDispatch();
 
   const handleQuantity = (type, product) => {
-
     dispatch(setQuantity({ type, product }));
   };
 
